@@ -68,11 +68,3 @@ Temporary Items
 *.css.map
 
 /database/e2e.sqlite
-.gitignore
-.htaccess
-css/
-favicon.ico
-index.php
-js/
-robots.txt
-web.config
