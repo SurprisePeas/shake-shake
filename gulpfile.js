@@ -1,17 +1,16 @@
 require('events').EventEmitter.defaultMaxListeners = 30;
 
-var cssnext = require('postcss-cssnext');
-var elixir = require('laravel-elixir');
-var gulp  = require('gulp');
-var gutils = require('gulp-util');
-var exec = require('child_process').exec;
-var chalk = require('chalk');
+let cssnext = require('postcss-cssnext');
+let elixir = require('laravel-elixir');
+let gutils = require('gulp-util');
+
 
 elixir.config.js.browserify.transformers.push({
 	name: 'vueify',
 	options: { postcss: [cssnext()] }
 });
 
+// 实现自动化push页面
 if (gutils.env._.indexOf('watch') > -1) {
 	elixir.config.js.browserify.plugins.push({
 		name: "browserify-hmr",
@@ -38,38 +37,4 @@ elixir(function (mix) {
 		], 'public/css/vendors.css', './');
 
 	mix.version(['css/vendors.css', 'css/app.css', 'js/vendors.js', 'js/main.js']);
-
-	if (process.env.NODE_ENV !== 'production') {
-		mix.browserSync({
-			proxy: 'koel.dev',
-			files: [
-				elixir.config.get('public.css.outputFolder') + '/**/*.css',
-				elixir.config.get('public.versioning.buildFolder') + '/rev-manifest.json',
-			]
-		});
-	}
-});
-
-gulp.task("e2e", function (cb) {
-	if (process.platform !== 'darwin') {
-		console.log(chalk.red('Unsupported OS. Exiting.'));
-		process.exit(1);
-	}
-
-	console.log(chalk.green('Running E2E tests'));
-	console.log(chalk.yellow('Make sure Selenium server with Chrome webdriver is listening on port 4444'));
-	var tasks = [
-		'php artisan serve --port=8081',
-		'phpunit tests/e2e -c phpunit.e2e.xml'
-	];
-	tasks.forEach(function (t) {
-		console.log('Executing ' + chalk.magenta(t));
-		var child = exec(t);
-		child.stdout.on('data', function(data) {
-			process.stdout.write(data);
-		});
-		child.stderr.on('data', function(data) {
-			process.stderr.write(data);
-		});
-	})
 });
