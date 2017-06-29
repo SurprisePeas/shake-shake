@@ -20,14 +20,15 @@
 		methods: {
 			login(){
 				this.failed = false;
-				userStore.login(this.email, this.password).then(() => {
+				userStore.login(this.email, this.password);
+				/*	.then(() => {
 					this.failed = false;
 					// 将值赋空, 避免下次密码出现
 					this.password = '';
 					event.emit('user.loggedin')
 				}).catch(() => {
 					this.failed = true
-				})
+				})*/
 			}
 		}
 	}

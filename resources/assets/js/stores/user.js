@@ -3,13 +3,14 @@
  */
 import NProgress from 'nprogress'
 
-import axios from 'axios'
+import {http} from '../services'
 
 export const userStore = {
 
-	// 登录
-	login(email,password){
-		console.log(email);
-		console.log(password);
+	login(email, password){
+		NProgress.start();
+		return new Promise((resolve, reject) => {
+			http.post('me', {email, password}, data => resolve(data), r => reject(r));
+		})
 	}
 };
