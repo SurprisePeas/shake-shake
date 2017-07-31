@@ -14,9 +14,9 @@ class AuthController extends Controller
 {
 	public function login(UserLoginRequest $request)
 	{
-
-		$credentials = $request->only('email', 'password');
-		try {
+        $credentials = $request->only('email', 'password');
+        dd(JWTAuth::attempt($credentials));
+        try {
 			if (!$token = JWTAuth::attempt($credentials)) {
 				return response()->json(['error' => 'invalid_credentials'], 401);
 			}
