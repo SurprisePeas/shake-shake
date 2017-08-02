@@ -18,17 +18,16 @@
         },
 
         methods: {
-            login(){
+            async login(){
                 this.failed = false;
-                userStore.login(this.email, this.password);
-                /*	.then(() => {
-                 this.failed = false;
-                 // 将值赋空, 避免下次密码出现
-                 this.password = '';
-                 event.emit('user.loggedin')
-                 }).catch(() => {
-                 this.failed = true
-                 })*/
+                userStore.login(this.email, this.password)/*.then(() => {
+                    this.failed = false;
+                    // 将值赋空, 避免下次密码出现
+                    this.password = '';
+                    event.emit('user.loggedin')
+                }).catch(() => {
+                    this.failed = true
+                })*/
             }
         }
     }
@@ -68,8 +67,8 @@
         border: 1px solid #333;
 
         &.error {
-            border-color: #8e4947;
             animation: shake .5s;
+            border: 2px solid #8e4947;
         }
 
         &::before {

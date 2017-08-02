@@ -1,88 +1,100 @@
 <template>
-	<div id="app">
-		<div id="main" v-show="authenticated"></div>
-		<div class="login-wrapper" v-if="!authenticated">
-			<login-form/>
-		</div>
-	</div>
+    <div id="app">
+        <div id="main" v-show="authenticated"></div>
+        <div class="login-wrapper" v-if="!authenticated">
+            <login-form/>
+        </div>
+    </div>
 </template>
 
 <script type="text/ecmascript-6">
-	import Vue from 'vue'
-	import $ from 'jquery'
+    import Vue from 'vue'
+    import $ from 'jquery'
 
-	import loginForm from './components/auth/login-form.vue'
+    import loginForm from './components/auth/login-form.vue'
 
-	import router from './router'
+    import router from './router'
 
-	export default{
-		components: {loginForm},
-		data(){
-			return {
-				authenticated: false
-			}
-		}
-	}
+    export default{
+        components: {loginForm},
+        data(){
+            return {
+                authenticated: false
+            }
+        },
+
+        /*created () {
+            event.on({
+                'user:loggedin': () => {
+                    this.authenticated = true;
+                    this.init();
+                }
+            })
+        }*/
+
+    }
 
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-	@import 'resources/assets/sass/partials/_vars.scss';
-	@import 'resources/assets/sass/partials/_mixins.scss';
-	@import 'resources/assets/sass/partials/_shared.scss';
-	#dragGhost {
+    @import 'resources/assets/sass/partials/_vars.scss';
+    @import 'resources/assets/sass/partials/_mixins.scss';
+    @import 'resources/assets/sass/partials/_shared.scss';
 
-		position: absolute;
-		display: inline-block;
-		background: $colorGreen;
-		padding: .8rem;
-		border-radius: .2rem;
-		color: #fff;
-		font-family: $fontFamily;
-		font-size: 1rem;
-		font-weight: $fontWeight_Thin;
-		top: -100px;
-		left: 0px;
+    #dragGhost {
 
-		/**
-		 * We can totally hide this element on touch devices, because there's
-		 * no drag and drop support there anyway.
-		 */
-		html.touchevents & {
-			display: none;
-		}
-	}
+        position: absolute;
+        display: inline-block;
+        background: $colorGreen;
+        padding: .8rem;
+        border-radius: .2rem;
+        color: #fff;
+        font-family: $fontFamily;
+        font-size: 1rem;
+        font-weight: $fontWeight_Thin;
+        top: -100px;
+        left: 0px;
 
-	#copyArea {
-		position: absolute;
-		left: -9999px;
-		width: 1px;
-		height: 1px;
-		bottom: 1px;
+        /**
+         * We can totally hide this element on touch devices, because there's
+         * no drag and drop support there anyway.
+         */
+        html.touchevents & {
+            display: none;
+        }
+    }
 
-		html.touchevents & {
-			display: none;
-		}
-	}
-	#main, .login-wrapper {
-		display: flex;
-		min-height: 100vh;
-		flex-direction: column;
+    #copyArea {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        bottom: 1px;
 
-		background: $colorMainBgr;
-		color: $colorMainText;
+        html.touchevents & {
+            display: none;
+        }
+    }
 
-		font-family: $fontFamily;
-		font-size: 1rem;
-		line-height: 1.5rem;
-		font-weight: $fontWeight_Thin;
+    #main, .login-wrapper {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
 
-		padding-bottom: $footerHeight;
-	}
+        background: $colorMainBgr;
+        color: $colorMainText;
 
-	.login-wrapper {
-		@include vertical-center();
-		padding-bottom: 0;
-	}
+        font-family: $fontFamily;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: $fontWeight_Thin;
+
+        padding-bottom: $footerHeight;
+    }
+
+    .login-wrapper {
+        @include vertical-center();
+        padding-bottom: 0;
+    }
 
 </style>
