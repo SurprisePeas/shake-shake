@@ -8,31 +8,40 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import Vue from 'vue'
-    import $ from 'jquery'
+import Vue from 'vue'
+import $ from 'jquery'
 
-    import loginForm from './components/auth/login-form.vue'
+import loginForm from './components/auth/login-form.vue'
 
-    import router from './router'
+import router from './router'
 
-    export default{
-        components: {loginForm},
-        data(){
-            return {
-                authenticated: false
-            }
-        },
+export default{
+    components: {loginForm},
+    data(){
+        return {
+            authenticated: false
+        }
+    },
 
-        /*created () {
-            event.on({
-                'user:loggedin': () => {
-                    this.authenticated = true;
-                    this.init();
-                }
-            })
-        }*/
+    created () {
+        /*event.on({
 
+            // 当用户登录时，将整个应用程序设置为“经过身份验证”并初始化它。
+            'user:loggedin': () => {
+                this.authenticated = true;
+                this.init();
+            },
+
+            // 记录当前用户并重置应用程序为登出状态。
+            async logout () {
+              await userStore.logout();
+              ls.remove('jwt-token');
+              forceReloadWindow();
+            },
+        })*/
     }
+
+}
 
 </script>
 

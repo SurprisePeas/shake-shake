@@ -7,26 +7,25 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\UserLoginRequest;
-use Exception;
-use Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Exception;
 use JWTAuth;
+use Log;
 
 class AuthController extends Controller
 {
     public function login(UserLoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
-        /*try {
+        try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
-        }*/
-        
-//        return response()->json(compact('token'));
-        return response()->json([true]);
+        }
+
+        return response()->json(compact('token'));
     }
 
 

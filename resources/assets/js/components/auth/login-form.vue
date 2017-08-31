@@ -8,6 +8,9 @@
 
 <script>
     import {userStore} from '../../stores'
+    import {event} from '../../utils'
+
+
     export default {
         data() {
             return {
@@ -19,15 +22,14 @@
 
         methods: {
             async login(){
-                this.failed = false;
-                userStore.login(this.email, this.password)/*.then(() => {
+                userStore.login(this.email, this.password).then(() => {
                     this.failed = false;
-                    // 将值赋空, 避免下次密码出现
+                    // 重置密码将值赋空, 下次此选项就会成为 empty
                     this.password = '';
                     event.emit('user.loggedin')
                 }).catch(() => {
                     this.failed = true
-                })*/
+                })
             }
         }
     }
