@@ -3,5 +3,5 @@
 
 ### 👾 Do it !
 
-- Laravel 5.4
+- Laravel 5.5
 - Vue 2.1
